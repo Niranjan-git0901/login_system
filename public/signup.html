@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Signup</h1>
+
+        <form id="signupForm">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter Name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+            >
+
+            <div class="password-box">
+
+    <input
+        type="password"
+        id="signupPassword"
+        name="password"
+        placeholder="Enter Password"
+        required
+    >
+
+    <span id="signupToggle">
+        👁️
+    </span>
+
+</div>
+
+            <button type="submit">
+                Signup
+            </button>
+
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+<script>
+
+const signupPassword =
+document.getElementById("signupPassword");
+
+const signupToggle =
+document.getElementById("signupToggle");
+
+signupToggle.addEventListener(
+    "click",
+    () => {
+
+        if(
+            signupPassword.type === "password"
+        ){
+
+            signupPassword.type = "text";
+
+            signupToggle.textContent = "🙈";
+
+        }
+        else{
+
+            signupPassword.type = "password";
+
+            signupToggle.textContent = "👁️";
+
+        }
+
+    }
+);
+
+</script>
+<script>
+
+const form =
+document.getElementById("signupForm");
+
+form.addEventListener(
+    "submit",
+    async(e)=>{
+
+        e.preventDefault();
+
+        const formData =
+        new FormData(form);
+
+        const data =
+        Object.fromEntries(formData);
+
+        const response =
+        await fetch(
+            "/signup",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                JSON.stringify(data)
+            }
+        );
+
+       const result =
+await response.text();
+
+alert(result);
+
+if(response.ok){
+
+    window.location.href =
+    "/dashboard.html";
+
+}
+
+    }
+);
+
+</script>
+</body>
+</html>

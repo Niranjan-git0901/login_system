@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Dashboard</h1>
+
+    <h3 id="welcome">
+        Welcome User
+    </h3>
+
+    <button id="logoutBtn">
+        Logout
+    </button>
+
+</div>
+
+<script>
+
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+    alert("Please Login");
+
+    window.location.href =
+    "/login.html";
+}
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+    "click",
+    ()=>{
+
+        localStorage.removeItem(
+            "token"
+        );
+
+        alert("Logged Out");
+
+        window.location.href =
+        "/login.html";
+    }
+);
+
+</script>
+
+</body>
+</html>
